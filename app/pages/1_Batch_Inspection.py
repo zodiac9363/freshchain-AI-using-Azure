@@ -158,7 +158,7 @@ with col_results:
                     </div>
                 </div>
                 <div>
-                    {render_badge(tier.name)}
+                    {render_badge(tier)}
                 </div>
             </div>
             <div style="margin-top: 10px; font-size: 0.9rem; color: #cbd5e1;">
@@ -172,7 +172,7 @@ with col_results:
         with r1:
             st.markdown(render_kpi_card("Spoilage Prob (P_s)", f"{p_s * 100:.1f}%", "Champion Model Estimate", "#f43f5e" if p_s > 0.5 else "#10b981"), unsafe_allow_html=True)
         with r2:
-            st.markdown(render_kpi_card("Urgency Score (U)", f"{u_score:.1f} / 100", f"Tier: {tier.name}", "#fbbf24" if u_score > 60 else "#38bdf8"), unsafe_allow_html=True)
+            st.markdown(render_kpi_card("Urgency Score (U)", f"{u_score:.1f} / 100", f"Tier: {tier}", "#fbbf24" if u_score > 60 else "#38bdf8"), unsafe_allow_html=True)
         with r3:
             st.markdown(render_kpi_card("Value at Risk (VaR)", f"${var_usd:,.2f}", f"Batch: {quantity_kg:,.0f} kg", "#c084fc"), unsafe_allow_html=True)
             

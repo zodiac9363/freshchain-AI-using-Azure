@@ -3,6 +3,8 @@ FreshChain AI — Design System & Custom CSS Tokens
 Provides rich dark-mode glassmorphic styling, custom card components, and vibrant visual accents.
 """
 
+from typing import Any, Optional
+
 CUSTOM_CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -210,9 +212,9 @@ def render_kpi_card(title: str, value: str, subtext: str = "", accent_color: str
     """
 
 
-def render_badge(tier: str, text: str = None) -> str:
+def render_badge(tier: Any, text: str = None) -> str:
     """Returns an HTML badge for a priority tier."""
-    t = tier.upper()
+    t = getattr(tier, "name", str(tier)).upper()
     display_text = text or t
     if t == "CRITICAL":
         return f'<span class="badge-critical">● {display_text}</span>'

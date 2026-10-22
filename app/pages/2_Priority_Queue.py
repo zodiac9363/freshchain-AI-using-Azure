@@ -93,7 +93,7 @@ def generate_inventory_queue():
             "co2_ppm": round(co2, 1),
             "spoilage_prob": p_s,
             "urgency_score": u_score,
-            "priority_tier": tier.name,
+            "priority_tier": tier,
             "quantity_kg": qty_kg,
             "unit_price": price,
             "var_usd": var_usd,
