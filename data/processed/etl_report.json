@@ -1,0 +1,193 @@
+{
+  "pipeline_version": "1.0.0",
+  "execution_timestamp_utc": "2026-10-21T06:01:27.949633+00:00",
+  "files_generated": {
+    "sensor_cleaned": "data\\processed\\sensor_cleaned.csv",
+    "fao_cleaned": "data\\processed\\fao_cleaned.csv",
+    "splits": {
+      "train": "data\\splits\\train.csv",
+      "validation": "data\\splits\\validation.csv",
+      "test": "data\\splits\\test.csv"
+    }
+  },
+  "splits_summary": {
+    "train": {
+      "rows": 7696,
+      "percentage": 70.0,
+      "spoilage_rate_pct": 48.45,
+      "fruit_breakdown": {
+        "Tomato": 2618,
+        "Orange": 2331,
+        "Pineapple": 1580,
+        "Banana": 1167
+      }
+    },
+    "validation": {
+      "rows": 1649,
+      "percentage": 15.0,
+      "spoilage_rate_pct": 48.45,
+      "fruit_breakdown": {
+        "Tomato": 561,
+        "Orange": 499,
+        "Pineapple": 338,
+        "Banana": 251
+      }
+    },
+    "test": {
+      "rows": 1650,
+      "percentage": 15.01,
+      "spoilage_rate_pct": 48.48,
+      "fruit_breakdown": {
+        "Tomato": 562,
+        "Orange": 500,
+        "Pineapple": 339,
+        "Banana": 249
+      }
+    }
+  },
+  "etl_audit_details": {
+    "extract": {
+      "source_type": "local_filesystem",
+      "sensor_source_path": "dataset\\Dataset.csv",
+      "fao_source_path": "dataset\\Data (1).csv",
+      "azure_blob_attempted": false,
+      "azure_blob_success": false,
+      "sensor_raw_shape": [
+        10995,
+        6
+      ],
+      "fao_raw_shape": [
+        4957,
+        18
+      ]
+    },
+    "validate_sensor": {
+      "dataset": "IoT_Sensor_Dataset",
+      "total_records": 10995,
+      "missing_columns": [],
+      "null_counts": {
+        "Fruit": 0,
+        "Temp": 0,
+        "Humid (%)": 0,
+        "Light (Fux)": 0,
+        "CO2 (pmm)": 0,
+        "Class": 0
+      },
+      "range_violations": {
+        "Temp": {
+          "expected_range": [
+            -5.0,
+            60.0
+          ],
+          "violations_count": 0
+        },
+        "Humid (%)": {
+          "expected_range": [
+            0.0,
+            100.0
+          ],
+          "violations_count": 0
+        },
+        "Light (Fux)": {
+          "expected_range": [
+            0.0,
+            2000.0
+          ],
+          "violations_count": 0
+        },
+        "CO2 (pmm)": {
+          "expected_range": [
+            0.0,
+            5000.0
+          ],
+          "violations_count": 0
+        }
+      },
+      "invalid_fruit_labels": 0,
+      "invalid_class_labels": 0,
+      "duplicate_rows": 2880,
+      "invalid_records_count": 0,
+      "valid_records_count": 10995,
+      "status": "PASSED"
+    },
+    "validate_fao": {
+      "dataset": "UN_FAO_Food_Loss_Dataset",
+      "total_records": 4957,
+      "missing_columns": [],
+      "null_counts": {
+        "country": 0,
+        "commodity": 0,
+        "year": 0,
+        "loss_percentage": 0,
+        "food_supply_stage": 17
+      },
+      "invalid_loss_percentages": 0,
+      "invalid_years": 0,
+      "duplicate_rows": 162,
+      "valid_records_count": 4940,
+      "invalid_records_count": 17,
+      "status": "PASSED_WITH_WARNINGS"
+    },
+    "transform_sensor": {
+      "initial_valid_records": 10995,
+      "final_transformed_records": 10995,
+      "duplicates_removed": 0,
+      "duplicate_rows_detected": 2880,
+      "engineered_features": [
+        {
+          "name": "vpd_kpa",
+          "unit": "kPa",
+          "formula": "e_s(T) * (1 - H/100)",
+          "description": "Vapor Pressure Deficit: physical force driving produce transpiration and moisture loss."
+        },
+        {
+          "name": "thi_index",
+          "unit": "dimensionless",
+          "formula": "T - (0.55 - 0.0055*H)*(T - 14.5)",
+          "description": "Temperature Humidity Index for psychrometric cold-storage thermal stress."
+        },
+        {
+          "name": "co2_fruit_deviation",
+          "unit": "ppm",
+          "formula": "co2_ppm - median_fruit_co2",
+          "description": "Commodity-specific respiration elevation above baseline storage equilibrium."
+        },
+        {
+          "name": "high_light_risk",
+          "unit": "binary flag {0,1}",
+          "formula": "1 if light_lux > 20.0 else 0",
+          "description": "Threshold flag for photolytic oxidation and chlorophyll degradation."
+        },
+        {
+          "name": "batch_id",
+          "unit": "identifier",
+          "formula": "BATCH-{FRU}-{ID}",
+          "description": "Synthetic reproducible batch ID for cold-chain lot simulation."
+        }
+      ],
+      "class_balance": {
+        "fresh_count": 5667,
+        "spoiled_count": 5328,
+        "spoilage_rate_pct": 48.46
+      }
+    },
+    "transform_fao": {
+      "initial_valid_records": 4940,
+      "final_transformed_records": 4940,
+      "mean_loss_percentage": 11.12,
+      "median_loss_percentage": 8.0,
+      "top_stages": {
+        "Whole Chain": 2348,
+        "Retail": 627,
+        "Farm": 454,
+        "Storage": 327,
+        "Wholesale": 239
+      }
+    },
+    "duration_seconds": 0.221
+  },
+  "azure_blob_sync": {
+    "attempted": false,
+    "success": false
+  }
+}

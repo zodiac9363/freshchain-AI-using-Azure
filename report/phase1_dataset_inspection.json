@@ -1,0 +1,346 @@
+{
+  "phase": 1,
+  "sensor_dataset": {
+    "file": "dataset\\Dataset.csv",
+    "n_rows": 10995,
+    "n_cols": 6,
+    "columns": [
+      "Fruit",
+      "Temp",
+      "Humid (%)",
+      "Light (Fux)",
+      "CO2 (pmm)",
+      "Class"
+    ],
+    "column_details": {
+      "Fruit": {
+        "dtype": "str",
+        "sample_values": [
+          "Orange",
+          "Pineapple",
+          "Banana",
+          "Tomato"
+        ],
+        "n_unique": 4,
+        "missing_count": 0
+      },
+      "Temp": {
+        "dtype": "int64",
+        "sample_values": [
+          "22",
+          "24",
+          "25",
+          "23",
+          "26"
+        ],
+        "n_unique": 7,
+        "missing_count": 0
+      },
+      "Humid (%)": {
+        "dtype": "int64",
+        "sample_values": [
+          "95",
+          "89",
+          "90",
+          "93",
+          "84"
+        ],
+        "n_unique": 25,
+        "missing_count": 0
+      },
+      "Light (Fux)": {
+        "dtype": "float64",
+        "sample_values": [
+          "7.358649263",
+          "14.83589827",
+          "10.10404473",
+          "20.17964285",
+          "12.62144823"
+        ],
+        "n_unique": 323,
+        "missing_count": 0
+      },
+      "CO2 (pmm)": {
+        "dtype": "int64",
+        "sample_values": [
+          "361",
+          "370",
+          "355",
+          "388",
+          "316"
+        ],
+        "n_unique": 333,
+        "missing_count": 0
+      },
+      "Class": {
+        "dtype": "str",
+        "sample_values": [
+          "Good",
+          "Bad",
+          "BAD"
+        ],
+        "n_unique": 3,
+        "missing_count": 0
+      }
+    },
+    "missing_values": {
+      "Fruit": 0,
+      "Temp": 0,
+      "Humid (%)": 0,
+      "Light (Fux)": 0,
+      "CO2 (pmm)": 0,
+      "Class": 0
+    },
+    "duplicate_rows": 2880,
+    "fruit_counts": {
+      "Tomato": 3741,
+      "Orange": 3330,
+      "Pineapple": 2257,
+      "Banana": 1667
+    },
+    "raw_class_counts": {
+      "Good": 5667,
+      "Bad": 4617,
+      "BAD": 711
+    },
+    "numerical_summary": {
+      "Temp": {
+        "min": 21.0,
+        "max": 27.0,
+        "mean": 23.839290586630288,
+        "median": 24.0,
+        "std": 1.2348049137644839
+      },
+      "Humid (%)": {
+        "min": 71.0,
+        "max": 95.0,
+        "mean": 93.52560254661209,
+        "median": 95.0,
+        "std": 3.0008115887702553
+      },
+      "Light (Fux)": {
+        "min": 4.22124279,
+        "max": 268.4478082,
+        "mean": 24.9325576211477,
+        "median": 12.90803823,
+        "std": 48.023099973639745
+      },
+      "CO2 (pmm)": {
+        "min": 20.0,
+        "max": 478.0,
+        "mean": 319.53024101864486,
+        "median": 323.0,
+        "std": 58.88934957560966
+      }
+    },
+    "has_timestamp": false,
+    "has_batch_id": true
+  },
+  "fao_dataset": {
+    "file": "dataset\\Data (1).csv",
+    "n_rows": 4957,
+    "n_cols": 18,
+    "columns": [
+      "m49_code",
+      "country",
+      "region",
+      "cpc_code",
+      "commodity",
+      "year",
+      "loss_percentage",
+      "loss_percentage_original",
+      "loss_quantity",
+      "activity",
+      "food_supply_stage",
+      "treatment",
+      "cause_of_loss",
+      "sample_size",
+      "method_data_collection",
+      "reference",
+      "url",
+      "notes"
+    ],
+    "column_details": {
+      "m49_code": {
+        "dtype": "int64",
+        "n_unique": 86,
+        "missing_count": 0
+      },
+      "country": {
+        "dtype": "str",
+        "n_unique": 86,
+        "missing_count": 0
+      },
+      "region": {
+        "dtype": "str",
+        "n_unique": 135,
+        "missing_count": 4334
+      },
+      "cpc_code": {
+        "dtype": "float64",
+        "n_unique": 72,
+        "missing_count": 0
+      },
+      "commodity": {
+        "dtype": "str",
+        "n_unique": 81,
+        "missing_count": 0
+      },
+      "year": {
+        "dtype": "int64",
+        "n_unique": 26,
+        "missing_count": 0
+      },
+      "loss_percentage": {
+        "dtype": "float64",
+        "n_unique": 1329,
+        "missing_count": 0
+      },
+      "loss_percentage_original": {
+        "dtype": "str",
+        "n_unique": 2010,
+        "missing_count": 0
+      },
+      "loss_quantity": {
+        "dtype": "str",
+        "n_unique": 1122,
+        "missing_count": 3687
+      },
+      "activity": {
+        "dtype": "str",
+        "n_unique": 95,
+        "missing_count": 3018
+      },
+      "food_supply_stage": {
+        "dtype": "str",
+        "n_unique": 18,
+        "missing_count": 17
+      },
+      "treatment": {
+        "dtype": "str",
+        "n_unique": 235,
+        "missing_count": 4361
+      },
+      "cause_of_loss": {
+        "dtype": "str",
+        "n_unique": 161,
+        "missing_count": 4491
+      },
+      "sample_size": {
+        "dtype": "str",
+        "n_unique": 126,
+        "missing_count": 4082
+      },
+      "method_data_collection": {
+        "dtype": "str",
+        "n_unique": 11,
+        "missing_count": 14
+      },
+      "reference": {
+        "dtype": "str",
+        "n_unique": 145,
+        "missing_count": 19
+      },
+      "url": {
+        "dtype": "str",
+        "n_unique": 43,
+        "missing_count": 2932
+      },
+      "notes": {
+        "dtype": "str",
+        "n_unique": 210,
+        "missing_count": 4361
+      }
+    },
+    "missing_values": {
+      "m49_code": 0,
+      "country": 0,
+      "region": 4334,
+      "cpc_code": 0,
+      "commodity": 0,
+      "year": 0,
+      "loss_percentage": 0,
+      "loss_percentage_original": 0,
+      "loss_quantity": 3687,
+      "activity": 3018,
+      "food_supply_stage": 17,
+      "treatment": 4361,
+      "cause_of_loss": 4491,
+      "sample_size": 4082,
+      "method_data_collection": 14,
+      "reference": 19,
+      "url": 2932,
+      "notes": 4361
+    },
+    "duplicate_rows": 162,
+    "top_10_commodities": {
+      "Tomatoes": 482,
+      "Mangoes, guavas and mangosteens": 290,
+      "Cabbages": 277,
+      "Grapes": 256,
+      "Bananas": 193,
+      "Cauliflowers and broccoli": 188,
+      "Apples": 165,
+      "Carrots and turnips": 144,
+      "Onions and shallots, green": 141,
+      "Papayas": 132
+    },
+    "supply_stages": {
+      "Whole supply chain": 2348,
+      "Retail": 627,
+      "Farm": 454,
+      "Storage": 327,
+      "Wholesale": 239,
+      "Harvest": 210,
+      "Households": 169,
+      "Transport": 154,
+      "Processing": 107,
+      "Post-harvest": 72,
+      "Trader": 66,
+      "Market": 48,
+      "Export": 47,
+      "Packing": 24,
+      "Distribution": 17,
+      "Collector": 13,
+      "Grading": 11,
+      "Pre-harvest": 7
+    },
+    "loss_percentage_stats": {
+      "valid_loss_count": 4957,
+      "min": 0.0,
+      "max": 65.0,
+      "mean": 11.146497639701433,
+      "median": 8.0,
+      "std": 10.587705662844959
+    },
+    "years_covered": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2026
+    ],
+    "n_countries": 86
+  }
+}

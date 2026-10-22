@@ -1,0 +1,79 @@
+{
+  "candidate_validation_comparison": {
+    "Logistic_Regression": {
+      "accuracy": 0.9169,
+      "precision": 0.895,
+      "recall": 0.9387,
+      "f1": 0.9163,
+      "roc_auc": 0.9765,
+      "confusion_matrix": {
+        "tn": 762,
+        "fp": 88,
+        "fn": 49,
+        "tp": 750
+      },
+      "latency_ms_per_sample": 0.0037,
+      "training_time_sec": 0.0898
+    },
+    "Random_Forest": {
+      "accuracy": 0.9988,
+      "precision": 0.9987,
+      "recall": 0.9987,
+      "f1": 0.9987,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 849,
+        "fp": 1,
+        "fn": 1,
+        "tp": 798
+      },
+      "latency_ms_per_sample": 0.0356,
+      "training_time_sec": 0.3379
+    },
+    "Gradient_Boosting": {
+      "accuracy": 0.997,
+      "precision": 0.9962,
+      "recall": 0.9975,
+      "f1": 0.9969,
+      "roc_auc": 1.0,
+      "confusion_matrix": {
+        "tn": 847,
+        "fp": 3,
+        "fn": 2,
+        "tp": 797
+      },
+      "latency_ms_per_sample": 0.0076,
+      "training_time_sec": 1.6236
+    }
+  },
+  "champion_model": "Random_Forest",
+  "held_out_test_metrics": {
+    "accuracy": 0.9994,
+    "precision": 0.9988,
+    "recall": 1.0,
+    "f1": 0.9994,
+    "roc_auc": 1.0,
+    "confusion_matrix": {
+      "tn": 849,
+      "fp": 1,
+      "fn": 0,
+      "tp": 800
+    },
+    "latency_ms_per_sample": 0.0287
+  },
+  "features_used": {
+    "numeric": [
+      "temperature_c",
+      "humidity_pct",
+      "light_lux",
+      "co2_ppm",
+      "vpd_kpa",
+      "thi_index",
+      "co2_fruit_deviation",
+      "high_light_risk"
+    ],
+    "categorical": [
+      "fruit"
+    ]
+  }
+}

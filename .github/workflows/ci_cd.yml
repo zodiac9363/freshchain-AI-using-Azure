@@ -1,0 +1,90 @@
+name: FreshChain AI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # Job 1: Linting, Schema Validation, and Automated Unit Tests
+  test-and-validate:
+    name: Lint, Validate & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Upgrade Pip & Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 httpx
+
+      - name: Syntax & Code Linting
+        run: |
+          # Stop build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.venv,mlruns
+          # Exit-zero treat all errors as warnings
+          flake8 . --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics --exclude=.venv,mlruns
+
+      - name: Run Automated Pytest Suite
+        run: |
+          pytest -v --tb=short
+
+  # Job 2: Build & Validate Docker Container
+  build-container:
+    name: Build Multi-Stage Docker Image
+    needs: test-and-validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile
+          push: false
+          tags: freshchain-ai:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Job 3: Optional Cloud Deployment (Gated by Azure Credentials Secret)
+  deploy-cloud:
+    name: Deploy to Azure (Optional)
+    needs: [test-and-validate, build-container]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Cloud Deployment Secrets
+        id: check-secrets
+        run: |
+          if [ -n "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}" ]; then
+            echo "has_azure_secret=true" >> $GITHUB_OUTPUT
+            echo "[INFO] Azure publish profile detected. Proceeding to deploy."
+          else
+            echo "has_azure_secret=false" >> $GITHUB_OUTPUT
+            echo "[INFO] No Azure deployment secrets configured. Skipping cloud push to protect student credit."
+          fi
+
+      - name: Deploy to Azure Web App / Functions
+        if: steps.check-secrets.outputs.has_azure_secret == 'true'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: freshchain-api
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .

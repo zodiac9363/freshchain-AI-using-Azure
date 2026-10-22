@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables & secrets (CRITICAL FOR AZURE SECURITY)
+.env
+*.env
+local.settings.json
+secrets.json
+
+# MLflow tracking local outputs
+mlruns/
+.mlflow/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
