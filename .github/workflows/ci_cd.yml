@@ -52,15 +52,36 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker Image
+      - name: Build and Load Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./docker/Dockerfile
-          push: false
+          load: true
           tags: freshchain-ai:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Test Container Execution & In-Container Prediction
+        run: |
+          echo "[1/4] Starting container in background..."
+          docker run -d -p 8000:8000 --name freshchain-test freshchain-ai:latest
+          
+          echo "[2/4] Waiting 6 seconds for container startup..."
+          sleep 6
+          docker ps
+          
+          echo "[3/4] Verifying HTTP healthcheck and prediction inside container..."
+          curl -f http://localhost:8000/api/health
+          curl -f -X POST http://localhost:8000/api/predict \
+            -H "Content-Type: application/json" \
+            -d '{"fruit": "Tomato", "temperature_c": 22.0, "humidity_pct": 85.0, "light_lux": 10.0, "co2_ppm": 340.0, "quantity_kg": 500, "price_per_kg": 1.5}'
+            
+          echo "[4/4] Verifying ETL execution works inside container..."
+          docker exec freshchain-test python etl/run_pipeline.py
+          
+          echo "All in-container execution tests passed!"
+          docker stop freshchain-test
 
   # Job 3: Optional Cloud Deployment (Gated by Azure Credentials Secret)
   deploy-cloud:
