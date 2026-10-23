@@ -13,6 +13,9 @@ import mlflow.sklearn
 import pandas as pd
 from datetime import datetime, timezone
 from typing import Dict, Any
+from dotenv import load_dotenv
+
+load_dotenv()
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
@@ -40,7 +43,8 @@ def setup_mlflow_tracking():
 
     if azure_ml_tracking_uri and "azureml" in azure_ml_tracking_uri:
         mlflow.set_tracking_uri(azure_ml_tracking_uri)
-        print(f"[MLflow] Connected to Azure ML Remote Workspace: {azure_ml_tracking_uri}")
+        print(f"[MLflow] Connecting to Azure ML Remote Workspace:\n  {azure_ml_tracking_uri}\n")
+        print("[Azure ML Auth] If prompted below with a device code, open the URL and enter the code.\n", flush=True)
     elif azure_workspace:
         try:
             from azure.ai.ml import MLClient
@@ -62,7 +66,14 @@ def setup_mlflow_tracking():
         print(f"[MLflow] SQLite tracking database active: sqlite:///{db_path}")
 
     experiment_name = "freshchain-produce-quality-classification"
-    mlflow.set_experiment(experiment_name)
+    try:
+        mlflow.set_experiment(experiment_name)
+    except Exception as e:
+        print(f"\n[MLflow Warning] Could not connect to remote Azure ML tracking server: {e}")
+        print("[MLflow] Falling back to local SQLite database: mlflow.db")
+        db_path = os.path.abspath(os.path.join(PROJECT_ROOT, "mlflow.db")).replace("\\", "/")
+        mlflow.set_tracking_uri(f"sqlite:///{db_path}")
+        mlflow.set_experiment(experiment_name)
     return experiment_name
 
 
@@ -154,7 +165,7 @@ def run_tracked_experiments() -> Dict[str, Any]:
             # 6. Log sklearn Model using cloudpickle serialization
             mlflow.sklearn.log_model(
                 sk_model=pipe,
-                name="model",
+                artifact_path="model",
                 serialization_format="cloudpickle",
                 registered_model_name="FreshChain-Produce-Quality-RF" if model_name == "Random_Forest" else None
             )

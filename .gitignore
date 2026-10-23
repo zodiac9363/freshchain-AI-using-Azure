@@ -27,6 +27,8 @@ secrets.json
 # MLflow tracking local outputs
 mlruns/
 .mlflow/
+*.db
+*.db.bak
 
 # IDE
 .vscode/

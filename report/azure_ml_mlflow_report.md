@@ -1,8 +1,8 @@
 # FreshChain AI — Phase 5 Azure ML & MLflow Experiment Tracking Report
 **Experiment Name**: `freshchain-produce-quality-classification`  
-**Experiment ID**: `1`  
+**Experiment ID**: `2`  
 **Tracking URI**: `sqlite:///Z:/5th sem projects/cloud 3rd IA project/mlflow.db`  
-**Execution Timestamp**: 2026-10-21T06:11:52.659102+00:00  
+**Execution Timestamp**: 2026-10-23T12:46:02.232148+00:00  
 
 ---
 
@@ -12,9 +12,9 @@ Every candidate algorithm was executed under strict MLflow tracking to guarantee
 
 | Candidate Model | MLflow Run ID | Validation Accuracy | Spoilage Precision | Spoilage Recall | Validation F1-Score | Validation ROC-AUC | Training Time |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Logistic Regression** | `f40993df5b25...` | 0.9169 | 0.8950 | 0.9387 | **0.9163** | 0.9765 | 0.167s |
-| **Random Forest** | `500a84dc54cb...` | 0.9988 | 0.9987 | 0.9987 | **0.9987** | 1.0000 | 0.428s |
-| **Gradient Boosting** | `cf19037e45dc...` | 0.9970 | 0.9962 | 0.9975 | **0.9969** | 1.0000 | 2.072s |
+| **Logistic Regression** | `e37695411f13...` | 0.9169 | 0.8950 | 0.9387 | **0.9163** | 0.9765 | 0.235s |
+| **Random Forest** | `65d896b00315...` | 0.9988 | 0.9987 | 0.9987 | **0.9987** | 1.0000 | 0.200s |
+| **Gradient Boosting** | `e264418070cd...` | 0.9970 | 0.9962 | 0.9975 | **0.9969** | 1.0000 | 0.922s |
 
 ---
 
@@ -22,7 +22,7 @@ Every candidate algorithm was executed under strict MLflow tracking to guarantee
 
 - **Champion Selected**: `Random_Forest`
 - **Registered Model Name**: `FreshChain-Produce-Quality-RF`
-- **Champion MLflow Run ID**: `500a84dc54cb4e21af5e8a54b63180da`
+- **Champion MLflow Run ID**: `65d896b0031542e1a98663c8e5f7624b`
 - **Held-Out Test Set Performance**:
   - **Accuracy**: 0.9994
   - **Precision**: 0.9988
