@@ -36,7 +36,10 @@ COPY ml/ /app/ml/
 COPY src/ /app/src/
 COPY functions/ /app/functions/
 COPY app/ /app/app/
-COPY data/ /app/data/
+# Copy curated data assets only (azure_blob_emulator and raw replicas excluded)
+COPY data/processed/ /app/data/processed/
+COPY data/raw/ /app/data/raw/
+COPY data/splits/ /app/data/splits/
 COPY report/ /app/report/
 
 # Non-root user for security compliance

@@ -1,7 +1,7 @@
 # FreshChain AI — Phase 4 Azure Blob Storage Lake Report
-**Storage Architecture Mode**: `Local_Cloud_Emulator`  
-**Connected to Live Azure**: `False`  
-**Date Generated**: 2026-10-22T06:35:10.634238+00:00  
+**Storage Architecture Mode**: `Azure_Cloud_Blob_Storage`  
+**Connected to Live Azure**: `True`  
+**Date Generated**: 2026-10-23T11:36:38.432087+00:00  
 
 ---
 
@@ -20,17 +20,17 @@ FreshChain AI uses a multi-tier cloud data lake layout adhering to the Medallion
 ## 2. Container Inventory & Data Verification
 
 ### Container: `freshchain-raw` (1,843,311 bytes, 2 items)
-- **`fao_raw.csv`**: [Secure URI / SAS Token](emulator://freshchain-raw/fao_raw.csv?read_token=freshchain_verified_local_sas)
-- **`sensor_raw.csv`**: [Secure URI / SAS Token](emulator://freshchain-raw/sensor_raw.csv?read_token=freshchain_verified_local_sas)
+- **`fao_raw.csv`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-raw/fao_raw.csv?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=2CMrbjyDH2M9XZCtUQMlVU0XlVvayAJOAV6UIu6DHYM%3D)
+- **`sensor_raw.csv`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-raw/sensor_raw.csv?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=ZK2H92Gdm0MTlo/uBb4zJs7nUzNFFAyHz23BlJz/IAQ%3D)
 
 ### Container: `freshchain-processed` (1,470,295 bytes, 3 items)
-- **`etl_report.json`**: [Secure URI / SAS Token](emulator://freshchain-processed/etl_report.json?read_token=freshchain_verified_local_sas)
-- **`fao_cleaned.csv`**: [Secure URI / SAS Token](emulator://freshchain-processed/fao_cleaned.csv?read_token=freshchain_verified_local_sas)
-- **`sensor_cleaned.csv`**: [Secure URI / SAS Token](emulator://freshchain-processed/sensor_cleaned.csv?read_token=freshchain_verified_local_sas)
+- **`etl_report.json`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-processed/etl_report.json?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=xNzrhoJVF5bwdcv/gZQZmQZ1jJbQVw6iz1Dc06GeRXU%3D)
+- **`fao_cleaned.csv`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-processed/fao_cleaned.csv?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=%2BHoZaLQTpp/yP%2BRBaQeZ52%2B5LCrl21HQjXzB%2BET2N8A%3D)
+- **`sensor_cleaned.csv`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-processed/sensor_cleaned.csv?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=qI1yGSOI60UUTd7zFaqQv6%2BGKoQzQMPIlNJTUfR3abg%3D)
 
 ### Container: `freshchain-analytics` (843,760 bytes, 2 items)
-- **`freshchain_champion_pipeline.joblib`**: [Secure URI / SAS Token](emulator://freshchain-analytics/freshchain_champion_pipeline.joblib?read_token=freshchain_verified_local_sas)
-- **`model_comparison_results.json`**: [Secure URI / SAS Token](emulator://freshchain-analytics/model_comparison_results.json?read_token=freshchain_verified_local_sas)
+- **`freshchain_champion_pipeline.joblib`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-analytics/freshchain_champion_pipeline.joblib?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=k8OLo3houb4u9g1FFvPsDKvjks1W/IfEZDAZePjCIDM%3D)
+- **`model_comparison_results.json`**: [Secure URI / SAS Token](https://freshchainstorage10.blob.core.windows.net/freshchain-analytics/model_comparison_results.json?se=2026-10-24T11%3A36%3A38Z&sp=r&sv=2026-10-06&sr=b&sig=xWI/AdH4OuVGoBr146ifH%2BkEJOYeg%2BmWs%2BxO%2BTfVnw8%3D)
 
 ---
 

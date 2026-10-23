@@ -12,3 +12,8 @@ htmlcov/
 .env
 local.settings.json
 mlruns/
+mlflow.db
+
+# Azure emulators and raw lake replicas
+data/azure_blob_emulator/
+dataset/

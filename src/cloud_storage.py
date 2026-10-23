@@ -220,10 +220,12 @@ def run_cloud_storage_demo():
 
     # 2. Upload raw source datasets to freshchain-raw
     print("\n[2/4] Uploading raw produce sensor & FAO datasets to 'freshchain-raw'...")
-    res_sensor = mgr.upload_file(CONTAINER_RAW, "sensor_raw.csv", os.path.join("dataset", "Dataset.csv"))
+    sensor_src = os.path.join("dataset", "Dataset.csv") if os.path.exists(os.path.join("dataset", "Dataset.csv")) else os.path.join("data", "raw", "sensor_raw.csv")
+    fao_src = os.path.join("dataset", "Data (1).csv") if os.path.exists(os.path.join("dataset", "Data (1).csv")) else os.path.join("data", "raw", "fao_raw.csv")
+    res_sensor = mgr.upload_file(CONTAINER_RAW, "sensor_raw.csv", sensor_src)
     print(f"  -> Uploaded sensor_raw.csv ({res_sensor['bytes_uploaded']:,} bytes) to {CONTAINER_RAW}")
     
-    res_fao = mgr.upload_file(CONTAINER_RAW, "fao_raw.csv", os.path.join("dataset", "Data (1).csv"))
+    res_fao = mgr.upload_file(CONTAINER_RAW, "fao_raw.csv", fao_src)
     print(f"  -> Uploaded fao_raw.csv ({res_fao['bytes_uploaded']:,} bytes) to {CONTAINER_RAW}")
 
     # 3. Upload processed datasets and ETL report to freshchain-processed
