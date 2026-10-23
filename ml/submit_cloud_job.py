@@ -27,6 +27,8 @@ def main():
     print(f"Workspace: {workspace_name} | Resource Group: {resource_group}")
     print("=" * 70)
 
+    tenant_id = os.getenv("AZURE_TENANT_ID", "b3db39c4-ddc0-4755-8e89-ebd4c2cd2ab2")
+
     def prompt_callback(uri, code, expires_on):
         print("\n" + "=" * 65)
         print("  🔑 AZURE LOGIN REQUIRED TO SUBMIT CLOUD JOB")
@@ -34,13 +36,9 @@ def main():
         print(f"  2. Enter code: {code}")
         print("=" * 65 + "\n", flush=True)
 
-    # Use DeviceCodeCredential with fallback
-    try:
-        cred = DeviceCodeCredential(prompt_callback=prompt_callback)
-    except Exception:
-        cred = DefaultAzureCredential()
-
-    ml_client = MLClient(cred, subscription_id, resource_group, workspace_name)
+    # Authenticate specifically with the Azure for Students tenant
+    cred = DeviceCodeCredential(tenant_id=tenant_id, prompt_callback=prompt_callback)
+    ml_client = MLClient(cred, subscription_id, resource_group, workspace_name, tenant_id=tenant_id)
 
     print("\n[1/3] Packaging project code and configuring cloud job definition...")
 
