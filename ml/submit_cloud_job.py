@@ -36,9 +36,16 @@ def main():
         print(f"  2. Enter code: {code}")
         print("=" * 65 + "\n", flush=True)
 
-    # Authenticate specifically with the Azure for Students tenant
-    cred = DeviceCodeCredential(tenant_id=tenant_id, prompt_callback=prompt_callback)
-    ml_client = MLClient(cred, subscription_id, resource_group, workspace_name, tenant_id=tenant_id)
+    # Try DefaultAzureCredential first (seamless inside Azure Cloud Shell / Azure ML)
+    try:
+        cred = DefaultAzureCredential()
+        ml_client = MLClient(cred, subscription_id, resource_group, workspace_name)
+        _ = ml_client.workspaces.get(workspace_name)
+        print("✅ Authenticated via Azure Cloud Shell / Managed Identity!")
+    except Exception:
+        print("ℹ️ Falling back to Device Code Authentication...")
+        cred = DeviceCodeCredential(tenant_id=tenant_id, prompt_callback=prompt_callback)
+        ml_client = MLClient(cred, subscription_id, resource_group, workspace_name, tenant_id=tenant_id)
 
     print("\n[1/3] Packaging project code and configuring cloud job definition...")
 
