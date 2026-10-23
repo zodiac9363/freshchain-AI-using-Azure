@@ -8,9 +8,9 @@
 
 | Candidate Model | Accuracy | Precision (Spoilage) | Recall (Spoilage) | F1-Score | ROC-AUC | Train Time (s) | Latency (ms/sample) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Logistic Regression** | 0.9169 | 0.8950 | 0.9387 | **0.9163** | 0.9765 | 0.090 | 0.0037 |
-| **Random Forest** **(Champion)** | 0.9988 | 0.9987 | 0.9987 | **0.9987** | 1.0000 | 0.338 | 0.0356 |
-| **Gradient Boosting** | 0.9970 | 0.9962 | 0.9975 | **0.9969** | 1.0000 | 1.624 | 0.0076 |
+| **Logistic Regression** | 0.9169 | 0.8950 | 0.9387 | **0.9163** | 0.9765 | 0.117 | 0.0030 |
+| **Random Forest** **(Champion)** | 0.9988 | 0.9987 | 0.9987 | **0.9987** | 1.0000 | 0.201 | 0.0188 |
+| **Gradient Boosting** | 0.9970 | 0.9962 | 0.9975 | **0.9969** | 1.0000 | 0.935 | 0.0042 |
 
 ---
 
@@ -23,7 +23,7 @@ The champion model was evaluated **exactly once** on the pristine held-out test 
 - **Test Recall (Spoilage)**: **1.0000**
 - **Test F1-Score**: **0.9994**
 - **Test ROC-AUC**: **1.0000**
-- **Prediction Latency**: **0.0287 ms** per inference call
+- **Prediction Latency**: **0.0195 ms** per inference call
 
 ### Confusion Matrix Breakdown (Test Set)
 - **True Negatives (Fresh correctly flagged)**: 849

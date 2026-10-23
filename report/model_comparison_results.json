@@ -12,8 +12,8 @@
         "fn": 49,
         "tp": 750
       },
-      "latency_ms_per_sample": 0.0037,
-      "training_time_sec": 0.0898
+      "latency_ms_per_sample": 0.003,
+      "training_time_sec": 0.1172
     },
     "Random_Forest": {
       "accuracy": 0.9988,
@@ -27,8 +27,8 @@
         "fn": 1,
         "tp": 798
       },
-      "latency_ms_per_sample": 0.0356,
-      "training_time_sec": 0.3379
+      "latency_ms_per_sample": 0.0188,
+      "training_time_sec": 0.2013
     },
     "Gradient_Boosting": {
       "accuracy": 0.997,
@@ -42,8 +42,8 @@
         "fn": 2,
         "tp": 797
       },
-      "latency_ms_per_sample": 0.0076,
-      "training_time_sec": 1.6236
+      "latency_ms_per_sample": 0.0042,
+      "training_time_sec": 0.9355
     }
   },
   "champion_model": "Random_Forest",
@@ -59,7 +59,7 @@
       "fn": 0,
       "tp": 800
     },
-    "latency_ms_per_sample": 0.0287
+    "latency_ms_per_sample": 0.0195
   },
   "features_used": {
     "numeric": [
