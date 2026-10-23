@@ -19,6 +19,10 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from dotenv import load_dotenv
+load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
+load_dotenv()
+
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -217,6 +221,31 @@ def train_and_compare_models() -> Dict[str, Any]:
     with open(results_json_path, "w") as f:
         json.dump(summary_report, f, indent=2)
     print(f"[Persisted] Model comparison results saved to: {results_json_path}")
+
+    # 7. Upload Champion Model & Results to Azure Blob Storage (Gold Tier)
+    conn_str = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    if conn_str:
+        try:
+            from azure.storage.blob import BlobServiceClient
+            bsc = BlobServiceClient.from_connection_string(conn_str)
+            print("\n[Azure Cloud] Publishing Champion Artifact to Gold Tier (freshchain-analytics)...")
+            
+            # Upload model joblib
+            bc_model = bsc.get_blob_client(container="freshchain-analytics", blob="freshchain_champion_pipeline.joblib")
+            with open(model_save_path, "rb") as f_model:
+                bc_model.upload_blob(f_model, overwrite=True)
+            props_m = bc_model.get_blob_properties()
+            print(f"  [SUCCESS] Uploaded: freshchain_champion_pipeline.joblib ({props_m.size:,} bytes | ETag: {props_m.etag})")
+            
+            # Upload results json
+            bc_json = bsc.get_blob_client(container="freshchain-analytics", blob="model_comparison_results.json")
+            with open(results_json_path, "rb") as f_json:
+                bc_json.upload_blob(f_json, overwrite=True)
+            props_j = bc_json.get_blob_properties()
+            print(f"  [SUCCESS] Uploaded: model_comparison_results.json ({props_j.size:,} bytes | ETag: {props_j.etag})")
+            print("[Azure Cloud] Live cloud persistence confirmed on Microsoft Azure Storage Account!")
+        except Exception as e:
+            print(f"[Azure Cloud Warning] Failed to upload to freshchain-analytics: {e}")
 
     return summary_report
 
