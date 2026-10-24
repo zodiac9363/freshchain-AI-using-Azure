@@ -1,6 +1,6 @@
 {
   "pipeline_version": "1.0.0",
-  "execution_timestamp_utc": "2026-10-21T06:01:27.949633+00:00",
+  "execution_timestamp_utc": "2026-10-24T04:38:12.806073+00:00",
   "files_generated": {
     "sensor_cleaned": "data\\processed\\sensor_cleaned.csv",
     "fao_cleaned": "data\\processed\\fao_cleaned.csv",
@@ -184,7 +184,7 @@
         "Wholesale": 239
       }
     },
-    "duration_seconds": 0.221
+    "duration_seconds": 0.175
   },
   "azure_blob_sync": {
     "attempted": false,
