@@ -16,4 +16,3 @@ mlflow.db
 
 # Azure emulators and raw lake replicas
 data/azure_blob_emulator/
-dataset/

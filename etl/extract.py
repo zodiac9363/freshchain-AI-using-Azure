@@ -61,11 +61,20 @@ def extract_data(
             metadata["azure_blob_error"] = str(e)
             metadata["source_type"] = "local_filesystem_fallback"
 
-    # Validate local files exist
+    # Validate local files exist with fallback to data/raw mirror
     if not os.path.exists(sensor_path):
-        raise FileNotFoundError(f"Raw sensor dataset not found at {sensor_path}")
+        alt_sensor = os.path.join(DATA_RAW_DIR, "sensor_raw.csv")
+        if os.path.exists(alt_sensor):
+            sensor_path = alt_sensor
+        else:
+            raise FileNotFoundError(f"Raw sensor dataset not found at {sensor_path} or {alt_sensor}")
+
     if not os.path.exists(fao_path):
-        raise FileNotFoundError(f"Raw FAO dataset not found at {fao_path}")
+        alt_fao = os.path.join(DATA_RAW_DIR, "fao_raw.csv")
+        if os.path.exists(alt_fao):
+            fao_path = alt_fao
+        else:
+            raise FileNotFoundError(f"Raw FAO dataset not found at {fao_path} or {alt_fao}")
 
     # Mirror to data/raw for standardized lake architecture
     local_sensor_raw = os.path.join(DATA_RAW_DIR, "sensor_raw.csv")

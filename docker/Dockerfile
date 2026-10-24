@@ -36,6 +36,7 @@ COPY ml/ /app/ml/
 COPY src/ /app/src/
 COPY functions/ /app/functions/
 COPY app/ /app/app/
+COPY dataset/ /app/dataset/
 # Copy curated data assets only (azure_blob_emulator and raw replicas excluded)
 COPY data/processed/ /app/data/processed/
 COPY data/raw/ /app/data/raw/
