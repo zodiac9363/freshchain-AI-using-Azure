@@ -35,6 +35,10 @@ jobs:
           # Exit-zero treat all errors as warnings
           flake8 . --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics --exclude=.venv,mlruns
 
+      - name: Train Champion Model on Runner Environment
+        run: |
+          python ml/train.py
+
       - name: Run Automated Pytest Suite
         run: |
           pytest -v --tb=short
